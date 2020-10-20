@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['powerticket.herokuapp.com', '*']
 # Application definition
 
 INSTALLED_APPS = [
+    'index',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -120,3 +121,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = '/static_root/'
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
