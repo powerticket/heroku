@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="{% static 'index/src/css/style.css' %}">
 </head>
 <body>
+  {% include '_navbar.html' %}
   <img src="https://picsum.photos/1920/1080" class="bg-image" alt="bg-img">
   <div class="container text-center position-relative text-black" style="top: 25%; opacity: 0.8;">
     <!-- 날씨 -->
@@ -38,6 +39,7 @@
       </div>
     </div>
   </div>
+  {% include '_footer.html' %}
   <script src="{% static 'index/src/js/dtime.js' %}"></script>
   <script src="{% static 'index/src/js/name.js' %}"></script>
   <script src="{% static 'index/src/js/todo.js' %}"></script>
