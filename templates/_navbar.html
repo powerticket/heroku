@@ -1,42 +1,58 @@
-<nav class="sticky-top navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Powerticket</a>
+<nav class="sticky-top navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+  <a class="navbar-brand" href="{% url 'index' %}">Powerticket</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse d-flex justify-content-between px-3" id="navbarNav">
     <ul class="navbar-nav">
-      <li class="nav-item active">
+      <li id="js-home" class="nav-item">
         <a class="nav-link" href="{% url 'index' %}">Home<span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="">Py-board</a>
+      <li id="js-board" class="nav-item">
+        <a class="nav-link" href="{% url 'board:index' %}">Py-board</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="">Py-data</a>
+      <li id="js-data" class="nav-item">
+        <a class="nav-link disabled" href="">Py-data</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="">Py-crawler</a>
+      <li id="js-crawler" class="nav-item">
+        <a class="nav-link disabled" href="">Py-crawler</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="">About</a>
+      <li id="js-about" class="nav-item">
+        <a class="nav-link disabled" href="">About</a>
       </li>
     </ul>
     <ul class="navbar-nav">
       {% if request.user.is_authenticated %}
-        <li class="nav-item">
+        <li id="js-profile" class="nav-item">
           <a class="nav-link" href="{% url 'accounts:profile' request.user.pk %}">Profile</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'accounts:logout' %}">Log out</a>
         </li>
       {% else %}
-        <li class="nav-item">
+        <li id="js-signup" class="nav-item">
           <a class="nav-link" href="{% url 'accounts:signup' %}">Sign up</a>
         </li>
-        <li class="nav-item">
+        <li id="js-login" class="nav-item">
           <a class="nav-link" href="{% url 'accounts:login' %}">Log in</a>
         </li>
       {% endif %}
     </ul>
   </div>
 </nav>
+<script>
+  const path = window.location.pathname
+  const navList = ['board', 'data', 'crawler']
+  if (path === '/') {
+    const li = document.querySelector('#js-home')
+    li.classList.add('active')
+  } else {
+    navList.some(selector => {
+      if (path.includes(selector)) {
+        const li = document.querySelector(`#js-${selector}`)
+        li.classList.add('active')
+        return
+      }
+    })
+  }
+</script>

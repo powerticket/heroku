@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+  <form action="" method="POST">
+    {% csrf_token %}
+    {{ writing_form.as_p }}
+    <div class="text-right">
+      <input class="btn btn-dark" type="submit" value="글 작성하기">
+      <a class="btn btn-dark" href="javascript:history.back()">뒤로 가기</a>
+    </div>
+  </form>
+{% endblock %}

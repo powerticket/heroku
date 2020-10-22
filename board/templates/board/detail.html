@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>{{ writing.title }}</h2>
+  <p>{{ writing.created_at }}</p>
+  <p>{{ writing.updated_at }}</p>
+  <hr>
+  <p>{{ writing.content }}</p>
+  <div class="text-right">
+    {% if request.user == writing.author %}
+      <a class="btn btn-dark" href="{% url 'board:delete' writing.pk %}">삭제</a>
+    {% endif %}
+    <a class="btn btn-dark" href="javascript:history.back()">뒤로 가기</a>
+  </div>
+{% endblock %}
