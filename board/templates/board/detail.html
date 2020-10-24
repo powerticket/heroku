@@ -1,14 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
   <h2>{{ writing.title }}</h2>
-  <p>{{ writing.created_at }}</p>
-  <p>{{ writing.updated_at }}</p>
+  <p class="mb-0">작성자: {{ writing.author }}</p>
+  <p style="font-size: 0.75rem;" class="text-right mb-0">최초 작성일: {{ writing.created_at|date:'Y-m-d H:i' }}</p>
+  <p style="font-size: 0.75rem;" class="text-right">최종 수정일: {{ writing.updated_at|date:'Y-m-d H:i' }}</p>
   <hr>
   <p>{{ writing.content }}</p>
   <div class="text-right">
+    <a class="btn btn-dark" href="{% url 'board:index' %}">글 목록</a>
     {% if request.user == writing.author %}
       <a class="btn btn-dark" href="{% url 'board:delete' writing.pk %}">삭제</a>
     {% endif %}
-    <a class="btn btn-dark" href="javascript:history.back()">뒤로 가기</a>
+  </div>
+  <hr>
+  <div>
+    <form action="{% url 'board:comment_create' writing.pk %}" method="POST" class="">
+      {% csrf_token %}
+      <div class="row align-items-center my-1">
+        <label for="content" class="mb-0 mr-1">댓글: </label>
+        <input type="text" name="content" id="content" class="form-control col mr-1">
+        <input type="submit" class="btn btn-dark col-1">
+      </div>
+    </form>
+    <ul>
+      {% for comment in comments %}
+        <li>{{ comment.author }}: {{ comment.content }}</li>
+      {% endfor %}
+    </ul>
   </div>
 {% endblock %}

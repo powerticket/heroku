@@ -15,13 +15,14 @@ class Writing(models.Model):
         return self.title
 
 
-# class Comment(models.Model):
-#     writing = models.ForeignKey(Writing, on_delete=models.CASCADE)
-#     comment = models.ForeignKey('self', on_delete=models.CASCADE, related_name='recomments', null=True, blank=True)
-#     content = models.TextField()
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     updated_at = models.DateTimeField(auto_now=True)
+class Comment(models.Model):
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    writing = models.ForeignKey(Writing, on_delete=models.CASCADE, related_name='comments', null=True, blank=True)
+    comment = models.ForeignKey('self', on_delete=models.CASCADE, related_name='recomments', null=True, blank=True)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 
-#     def __str__(self):
-#         return self.title
+    def __str__(self):
+        return self.title

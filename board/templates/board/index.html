@@ -17,7 +17,7 @@
           </th>
           <td class="text-left"><a class="text-body text-decoration-none" href="{% url 'board:detail' writing.pk %}">{{ writing.title }}</a></td>
           <td>{{ writing.author.username }}</td>
-          <td class="text-right">{{ writing.created_at|date:'Y년 m월 d일 H:m' }}</td>
+          <td class="text-right">{{ writing.created_at|date:'Y년 m월 d일 H:i' }}</td>
         </tr>
       {% endfor %}
     </tbody>
