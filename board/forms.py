@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Writing  # , Comment
+from .models import Writing, Comment
 
 
 class WritingForm(forms.ModelForm):
@@ -17,13 +17,13 @@ class WritingForm(forms.ModelForm):
         }
 
 
-# class CommentForm(forms.ModelForm):
-#     class Meta:
-#         model = Comment
-#         fields = ['content']
-#         widgets = {
-#             'content': forms.TextInput(attrs={'class': 'form-control'}),
-#         }
-#         labels = {
-#             'content': '댓글',
-#         }
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['content']
+        widgets = {
+            'content': forms.TextInput(attrs={'class': 'form-control col'}),
+        }
+        labels = {
+            'content': '댓글',
+        }

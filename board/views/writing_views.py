@@ -4,8 +4,8 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import (require_http_methods, require_POST,
                                           require_safe)
 
-from .forms import WritingForm
-from .models import Writing
+from ..forms import WritingForm, CommentForm
+from ..models import Writing, Comment
 
 
 # board create, read
@@ -112,7 +112,11 @@ def detail(request, board_pk):
         [type]: [description]
     """
     writing = get_object_or_404(Writing, pk=board_pk)
+    comment_form = CommentForm()
+    comments = writing.comments.all()
     context = {
         'writing': writing,
+        'comment_form': comment_form,
+        'comments': comments,
     }
     return render(request, 'board/detail.html', context)

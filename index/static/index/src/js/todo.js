@@ -88,7 +88,6 @@ function saveTodos () {
 }
 
 function countTodos (count) {
-  console.log(count)
   todoCount.innerText = count
 }
 
@@ -123,8 +122,6 @@ function init () {
   })
   todoCollapseButton.addEventListener('click', event => {
     todoCollapse = todoCollapse !== '0' ? '0' : '1'
-    console.log(todoCollapse)
-    console.log(todoCollapse !== '0')
     localStorage.setItem(TODOSHOW_LS, todoCollapse)
   })
 }
