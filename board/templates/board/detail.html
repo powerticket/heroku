@@ -13,19 +13,24 @@
     {% endif %}
   </div>
   <hr>
-  <div>
+  <div><i class="fas fa-comments mb-3" style="font-size:1.5rem;"></i>
+    <ul class="list-group">
+      {% for comment in comments %}
+        <li class="list-group-item">{{ comment.author }}: {{ comment.content }}
+          <div class="text-right">
+            <button class="btn"><i class="fas fa-trash-alt"></i></button>
+            <button class="btn"><i class="fas fa-reply"></i></button>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+    <br>
     <form action="{% url 'board:comment_create' writing.pk %}" method="POST" class="">
       {% csrf_token %}
       <div class="row align-items-center my-1">
-        <label for="content" class="mb-0 mr-1">댓글: </label>
         <input type="text" name="content" id="content" class="form-control col mr-1">
-        <input type="submit" class="btn btn-dark col-1">
+        <input type="submit" value="댓글 쓰기" class="btn btn-dark col-1">
       </div>
     </form>
-    <ul>
-      {% for comment in comments %}
-        <li>{{ comment.author }}: {{ comment.content }}</li>
-      {% endfor %}
-    </ul>
   </div>
 {% endblock %}
